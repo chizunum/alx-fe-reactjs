@@ -12,7 +12,7 @@ import UserProfile from "./UserProfile";
 
 function App() {
   const [count, setCount] = useState(0);
-  const userData = { name: "Jane Doe", email: "jane.doe@example.com" };
+  
 
   return (
     <>
