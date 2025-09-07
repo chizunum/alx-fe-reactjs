@@ -2,30 +2,20 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import Navbar from "./Navbar";
-import Home from "./Home";
-import About from "./About";
-import Services from "./Services";
-import Contact from "./Contact";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+
+import Home from './pages/Home';
+import About from './pages/About';
+import Services from './pages/Services';
+import Contact from './pages/Contact';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-    <div>
-      <Navbar />
-      <div style={{ marginTop: "60px" }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </div>
-    </div>
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -34,6 +24,24 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
+      <Router>
+          <Navbar />
+          <div style={{ padding: '1rem' }}>
+      <Routes>
+        {/* Home route */}
+        <Route path="/" element={<Home />} />
+
+        {/* About route */}
+        <Route path="/about" element={<About />} />
+
+        {/* Services route */}
+        <Route path="/services" element={<Services />} />
+
+        {/* Contact route */}
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+      </div>
+    </Router>
       <h1>Vite + React</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
