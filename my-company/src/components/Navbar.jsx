@@ -4,42 +4,28 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <nav style={styles.nav}>
-      <h2 style={styles.logo}>My Company</h2>
-      <ul style={styles.links}>
-        <li><Link to="/" style={styles.link}>Home</Link></li>
-        <li><Link to="/about" style={styles.link}>About</Link></li>
-        <li><Link to="/services" style={styles.link}>Services</Link></li>
-        <li><Link to="/contact" style={styles.link}>Contact</Link></li>
-      </ul>
+    <nav style={styles.navbar}>
+      <Link to="/" style={styles.link}>Home</Link>
+      <Link to="/about" style={styles.link}>About</Link>
+      <Link to="/services" style={styles.link}>Services</Link>
+      <Link to="/contact" style={styles.link}>Contact</Link>
     </nav>
   );
 };
 
 const styles = {
-  nav: {
+  navbar: {
+    backgroundColor: '#333',     // Dark background
+    padding: '1rem',
     display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: '1rem 2rem',
-    background: '#222',
-    color: '#fff',
-  },
-  logo: {
-    margin: 0,
-    fontSize: '1.5rem',
-  },
-  links: {
-    listStyle: 'none',
-    display: 'flex',
-    gap: '1.5rem',
-    margin: 0,
-    padding: 0,
+    justifyContent: 'center',
+    gap: '2rem',
   },
   link: {
     color: '#fff',
     textDecoration: 'none',
-    fontSize: '1.1rem',
+    fontSize: '1.2rem',
+    fontWeight: 'bold',
   },
 };
 
