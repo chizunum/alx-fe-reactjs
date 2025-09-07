@@ -1,8 +1,12 @@
 // UserInfo.jsx
-import UserDetails from './UserDetails';
+import React from 'react';
 
-function UserInfo() {
-  return <UserDetails />;
-}
+const UserInfo = () => {
+  return (
+    <div>
+      <p>Some other user info...</p>
+    </div>
+  );
+};
 
 export default UserInfo;

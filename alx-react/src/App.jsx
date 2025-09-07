@@ -6,14 +6,13 @@ import WelcomeMessage from './components/WelcomeMessage';
 import Header from './components/Header';
 import MainContent from './components/MainContent';
 import Footer from './components/Footer';
-import UserProfile from './components/UserProfile';
-import React from 'react';
-import ProfilePage from './ProfilePage';
-import { UserContext } from './UserContext';
+import React from "react";
+import { UserProvider } from "./UserContext";
+import UserProfile from "./UserProfile";
 
 function App() {
-  const [count, setCount] = useState(0)
-  const userData = { name: "Jane Doe", email: "jane.doe@example.com" };
+  const [count, setCount] = useState(0);
+  
 
   return (
     <>
@@ -21,6 +20,12 @@ function App() {
     <MainContent /> 
      <WelcomeMessage /> 
      <Footer /> 
+     <UserProvider>
+      <div>
+        <h1>Welcome to the App</h1>
+        <UserProfile />
+      </div>
+    </UserProvider>
      <div>
       <UserProfile 
         name="Alice" 
@@ -34,10 +39,6 @@ function App() {
         bio="Enjoys coding, coffee, and travel" 
       />
     </div>
-    <UserContext.Provider value={userData}>
-      <ProfilePage />
-    </UserContext.Provider>
-    <ProfilePage userData={userData} />;
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
