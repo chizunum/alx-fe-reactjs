@@ -2,10 +2,11 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import RecipeList from "./components/RecipeList";
 import AddRecipeForm from "./components/AddRecipeForm";
 import RecipeDetails from './components/RecipeDetails';
+import SearchBar from "./components/SearchBar";
 
 
 function Home() {
@@ -13,6 +14,7 @@ return (
 <div>
 <AddRecipeForm />
 <RecipeList />
+<SearchBar />
 </div>
 );
 }
