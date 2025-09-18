@@ -10,25 +10,28 @@ const Search = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
-    setUsers([]);
+  const handleSearch = async () => {
+  setLoading(true);
+  setError(null);
 
-    try {
-      const data = await fetchAdvancedUsers({ username, location, minRepos });
-      if (data.length === 0) {
-        setError("Looks like we cant find the user");
-      } else {
-        setUsers(data);
-      }
-    } catch (err) {
-      setError("Something went wrong. Try again.");
-    } finally {
-      setLoading(false);
+  try {
+    const data = await fetchAdvancedUsers({ username, location, minRepos });
+
+    if (!data || data.length === 0) {
+      setError("Looks like we cant find the user");
+      setUsers([]);
+    } else {
+      setUsers(data);
     }
-  };
+  } catch (err) {
+    console.error("Error fetching users:", err); // keeps a log for debugging
+    setError("Something went wrong. Try again.");
+    setUsers([]);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="max-w-2xl mx-auto mt-10 p-6 bg-white rounded-2xl shadow-md">
@@ -74,7 +77,11 @@ const Search = () => {
       <div className="mt-6 text-center">
         {loading && <p className="text-gray-500">Loading...</p>}
         {error && <p className="text-red-500">{error}</p>}
+        {!loading && users.length === 0 && !error && (
+          <p className="text-gray-500">Looks like we cant find the user</p>
+        )}
       </div>
+      
 
       {/* Results */}
       <div className="mt-6 space-y-4">
