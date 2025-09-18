@@ -9,6 +9,9 @@ function App() {
 
   return (
     <>
+    <div className="min-h-screen bg-gray-100">
+      <Search />
+    </div>
     <div>
       <h1 style={{ textAlign: "center", marginTop: "1rem" }}>
         GitHub User Search
