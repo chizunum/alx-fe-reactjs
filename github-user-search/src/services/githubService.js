@@ -1,18 +1,25 @@
 import axios from "axios";
 
-const GITHUB_API = "https://api.github.com/search/users";
+const BASE_URL = "https://api.github.com";
 
-export const fetchAdvancedUsers = async ({ username, location, minRepos }) => {
-  try {
-    let query = "";
+/**
+ * Basic fetch by username
+ */
+export const fetchUserData = async (username) => {
+  const response = await axios.get(`${BASE_URL}/users/${username}`);
+  return response.data;
+};
 
-    if (username) query += `${username} in:login `;
-    if (location) query += `location:${location} `;
-    if (minRepos) query += `repos:>=${minRepos} `;
+/**
+ * Advanced search with filters (username, location, min repos)
+ */
+export const searchUsers = async ({ username, location, minRepos }) => {
+  let query = "";
 
-    const response = await axios.get(`${GITHUB_API}?q=${encodeURIComponent(query)}&per_page=10`);
-    return response.data.items; // items = array of users
-  } catch (error) {
-    throw error;
-  }
+  if (username) query += `${username} in:login `;
+  if (location) query += `location:${location} `;
+  if (minRepos) query += `repos:>=${minRepos} `;
+
+  const response = await axios.get(`${BASE_URL}/search/users?q=${encodeURIComponent(query.trim())}`);
+  return response.data.items; // GitHub returns { total_count, items: [...] }
 };
