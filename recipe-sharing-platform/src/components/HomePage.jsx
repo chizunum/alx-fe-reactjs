@@ -18,7 +18,7 @@ function HomePage() {
       </h1>
 
       {/* Grid layout for recipes */}
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {recipes.map((recipe) => (
           <div
             key={recipe.id}
