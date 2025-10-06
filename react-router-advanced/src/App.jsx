@@ -21,16 +21,11 @@ function App() {
     <>
       <Router>
         <Routes>
-          {/* Home */}
-        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
 
-          {/* Dynamic Blog Route */}
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:postId" element={<Post />} />
-
-          {/* Protected Nested Routes */}
+        {/* Protected profile routes */}
         <Route
-          path="/profile/*"
+          path="/profile"
           element={
             <ProtectedRoute>
               <Profile />
@@ -40,12 +35,6 @@ function App() {
           <Route path="details" element={<ProfileDetails />} />
           <Route path="settings" element={<ProfileSettings />} />
         </Route>
-
-          {/* Login */}
-        <Route path="/login" element={<Login />} />
-
-          {/* Catch-all redirect */}
-        <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
       <div>
