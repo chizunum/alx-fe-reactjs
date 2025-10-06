@@ -1,113 +1,89 @@
 import React, { useState } from "react";
 
 const RegistrationForm = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
-
+  // State for form fields
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Basic validation
-    if (!formData.username || !formData.email || !formData.password) {
+    if (!username || !email || !password) {
       setError("All fields are required!");
       return;
     }
 
     setError("");
-    setIsSubmitting(true);
 
     try {
-      // Simulate API call using JSONPlaceholder
+      // Mock API call
       const response = await fetch("https://jsonplaceholder.typicode.com/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ username, email, password }),
       });
-
-      if (!response.ok) throw new Error("Failed to register user");
 
       const data = await response.json();
       console.log("User registered:", data);
       alert("Registration successful!");
 
-      // Reset form
-      setFormData({ username: "", email: "", password: "" });
-    } catch (error) {
-      console.error("Error:", error);
-      setError("Registration failed. Please try again.");
-    } finally {
-      setIsSubmitting(false);
+      // Reset fields
+      setUsername("");
+      setEmail("");
+      setPassword("");
+    } catch (err) {
+      console.error("Error:", err);
+      alert("Registration failed!");
     }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="space-y-4 max-w-md mx-auto mt-10 p-4 border rounded-lg shadow-sm"
-    >
-      <h2 className="text-xl font-semibold text-center mb-2">
-        Controlled Registration Form
-      </h2>
+    <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto mt-10">
+      <h2 className="text-xl font-semibold">Controlled Registration Form</h2>
 
-      {error && <p className="text-red-500 text-center">{error}</p>}
+      {error && <p className="text-red-500">{error}</p>}
 
       <div>
-        <label className="block font-medium mb-1">Username:</label>
+        <label>Username:</label>
         <input
           type="text"
           name="username"
-          value={formData.username} // ✅ controlled input
-          onChange={handleChange}
-          placeholder="Enter username"
-          className="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-blue-300"
+          value={username}          // ✅ controlled input
+          onChange={(e) => setUsername(e.target.value)}
+          className="border p-2 w-full rounded"
         />
       </div>
 
       <div>
-        <label className="block font-medium mb-1">Email:</label>
+        <label>Email:</label>
         <input
           type="email"
           name="email"
-          value={formData.email} // ✅ controlled input
-          onChange={handleChange}
-          placeholder="Enter email"
-          className="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-blue-300"
+          value={email}             // ✅ controlled input
+          onChange={(e) => setEmail(e.target.value)}
+          className="border p-2 w-full rounded"
         />
       </div>
 
       <div>
-        <label className="block font-medium mb-1">Password:</label>
+        <label>Password:</label>
         <input
           type="password"
           name="password"
-          value={formData.password} // ✅ controlled input
-          onChange={handleChange}
-          placeholder="Enter password"
-          className="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-blue-300"
+          value={password}          // ✅ controlled input
+          onChange={(e) => setPassword(e.target.value)}
+          className="border p-2 w-full rounded"
         />
       </div>
 
       <button
         type="submit"
-        disabled={isSubmitting}
-        className={`w-full p-2 rounded text-white transition ${
-          isSubmitting
-            ? "bg-gray-400 cursor-not-allowed"
-            : "bg-blue-500 hover:bg-blue-600"
-        }`}
+        className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
       >
-        {isSubmitting ? "Registering..." : "Register"}
+        Register
       </button>
     </form>
   );
