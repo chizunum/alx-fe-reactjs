@@ -5,26 +5,26 @@ const RegistrationForm = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Basic validation
     if (!username) {
-      setError("Username is required!");
+      setErrors("Username is required!");
       return;
     }
     if (!email) {
-      setError("Email is required!");
+      setErrors("Email is required!");
       return;
     }
     if (!password) {
-      setError("Password is required!");
+      setErrors("Password is required!");
       return;
     }
 
-    setError("");
+    setErrors("");
 
     try {
       // Mock API call
@@ -52,7 +52,7 @@ const RegistrationForm = () => {
     <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto mt-10">
       <h2 className="text-xl font-semibold">Controlled Registration Form</h2>
 
-      {error && <p className="text-red-500">{error}</p>}
+      {errors && <p className="text-red-500">{errors}</p>}
 
       <div>
         <label>Username:</label>
