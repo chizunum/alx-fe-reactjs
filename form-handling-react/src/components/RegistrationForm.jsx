@@ -11,8 +11,16 @@ const RegistrationForm = () => {
     e.preventDefault();
 
     // Basic validation
-    if (!username || !email || !password) {
-      setError("All fields are required!");
+    if (!username) {
+      setError("Username is required!");
+      return;
+    }
+    if (!email) {
+      setError("Email is required!");
+      return;
+    }
+    if (!password) {
+      setError("Password is required!");
       return;
     }
 
@@ -63,30 +71,4 @@ const RegistrationForm = () => {
           type="email"
           name="email"
           value={email}             // ✅ controlled input
-          onChange={(e) => setEmail(e.target.value)}
-          className="border p-2 w-full rounded"
-        />
-      </div>
-
-      <div>
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}          // ✅ controlled input
-          onChange={(e) => setPassword(e.target.value)}
-          className="border p-2 w-full rounded"
-        />
-      </div>
-
-      <button
-        type="submit"
-        className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
-      >
-        Register
-      </button>
-    </form>
-  );
-};
-
-export default RegistrationForm;
+          o
