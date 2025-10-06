@@ -1,16 +1,7 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 
-
-const { data, isLoading, isError, error, refetch } = useQuery({
-  queryKey: ["posts"],
-  queryFn: fetchPosts,
-  staleTime: 5000,
-  cacheTime: 10000,
-});
-
-
-// Function to fetch posts from the API
+// ✅ Function to fetch posts from the API
 const fetchPosts = async () => {
   const response = await fetch("https://jsonplaceholder.typicode.com/posts");
   if (!response.ok) {
@@ -20,22 +11,26 @@ const fetchPosts = async () => {
 };
 
 const PostsComponent = () => {
-  // Use React Query’s useQuery hook
+  // ✅ Correct placement of useQuery inside the component
   const {
     data: posts,
     isLoading,
     isError,
     error,
     refetch,
-  } = useQuery("posts", fetchPosts, {
-    staleTime: 5000, // cache data for 5 seconds before considering it stale
-    cacheTime: 10000, // data stays in cache for 10 seconds
+  } = useQuery({
+    queryKey: ["posts"],
+    queryFn: fetchPosts,
+    staleTime: 5000,             // Data is fresh for 5 seconds
+    cacheTime: 10000,            // Cache stays for 10 seconds
+    refetchOnWindowFocus: true,  // ✅ Refetch when tab regains focus
+    keepPreviousData: true,      // ✅ Keep showing old data while fetching new
   });
 
-  // Handle loading state
+  // Loading state
   if (isLoading) return <p>Loading posts...</p>;
 
-  // Handle error state
+  // Error state
   if (isError) return <p className="text-red-500">Error: {error.message}</p>;
 
   return (
