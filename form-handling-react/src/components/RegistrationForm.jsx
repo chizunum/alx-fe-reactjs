@@ -71,4 +71,30 @@ const RegistrationForm = () => {
           type="email"
           name="email"
           value={email}             // ✅ controlled input
-          o
+          onChange={(e) => setEmail(e.target.value)}
+          className="border p-2 w-full rounded"
+        />
+      </div>
+
+      <div>
+        <label>Password:</label>
+        <input
+          type="password"
+          name="password"
+          value={password}          // ✅ controlled input
+          onChange={(e) => setPassword(e.target.value)}
+          className="border p-2 w-full rounded"
+        />
+      </div>
+
+      <button
+        type="submit"
+        className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+      >
+        Register
+      </button>
+    </form>
+  );
+};
+
+export default RegistrationForm;
