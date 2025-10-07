@@ -1,3 +1,4 @@
+import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import TodoList from "../components/TodoList";
@@ -11,13 +12,11 @@ describe("TodoList Component", () => {
 
   test("adds a new todo", () => {
     render(<TodoList />);
-    const input = screen.getByPlaceholderText("Add a new todo");
-    const button = screen.getByText("Add");
-
-    fireEvent.change(input, { target: { value: "New Task" } });
-    fireEvent.click(button);
-
-    expect(screen.getByText("New Task")).toBeInTheDocument();
+    fireEvent.change(screen.getByPlaceholderText("Add new todo"), {
+      target: { value: "Study Jest" },
+    });
+    fireEvent.click(screen.getByText("Add"));
+    expect(screen.getByText("Study Jest")).toBeInTheDocument();
   });
 
   test("toggles a todo's completion", () => {
